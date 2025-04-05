@@ -1,0 +1,36 @@
+)attr default(%+_)
+  _ type( input) intens(low ) just(left ) hilite(uscore)
+  ~ type(text) intens(high) caps(off) just(asis ) hilite(reverse) color(turq)
+  Ý type(output) intens(high) caps(off) just(left) pas(on) skip(on)
+)Body Expand(\\)
+%Tutorial -\-\~The z ISPF Git Interface (zigi)%\-\- Tutorial
+%Selection ===>_ZCMD                                                          +
++
+                                %README+
++
++The%READme+command will Edit (create or update) a README.md file within
++the local repository.
++
++
++
++
++Command syntax:%readme+
++            or:%read+
++
++
++
++
++  "What's the one thing I can do such that by doing it everything else
++   will be easier or unnecessary."
++     -- Gary Keller
++
+         +Press the%Enter+key to continue your ZIGI tutorial journey.
+)Init
+ .cursor  = &zcmd
+)PROC
+ &zcont = zigih2b0
+)END
+/* --------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                              */
+/* Copyright (C) 2020 - 2021 GPL V3 - Henri Kuiper and Lionel Dyck */
+/* --------------------------------------------------------------- */

@@ -1,0 +1,1229 @@
+   *-------------------------------------------------------------------*
+   |  The User Guide and Cheat Sheet can be found at:                  |
+   |  https://github.com/zigi/zigi/wiki/6.-Documentation               |
+   *-------------------------------------------------------------------*
+
+=============================================================================
+This file is created as the RELEASE file and copied into the $CHANGES Panel
+=============================================================================
+
+                             ZIGI Release Notes
+                                Version 3.24
+                                Mar 14, 2025
+
+                         New Features and Functions
+                         --------------------------
+
+Key changes:     - zginstall.rex now updates ispf statistics properly
+                 - Branch display improvements
+                 - Prompt for ssh key size
+                 - Check for OpenSSH version 9 or later to support ed25519
+                   keys, if not found then only support rsa key
+                 - Add ssh key filename to GITInfo
+                 - BUG Fix to Clone/Replace with mixed PDS (text/binary)
+                 - Updated ZIGIEDIT panel attributes so it is no longer
+                   stored in binary format
+                 - Add info on the latest release version to Help->About
+
+* zigi           - Correct detection of ssh key, or lack thereof
+                 - Improve BRanch, MERge, and DiffBranch display
+                   with userid and date of last update
+                 - Fix bug for Ý??¨ Untracked incorrect reporting on members
+                 - Prompt for ssh key size (2048/3072/4096) for RSA and
+                   ed25519 keys
+                 - Popup (patience) for ssh-keygen processing
+                 - Check version of OpenSSH
+                 - On branch display do NOT include the current branch
+* zginstal       - Fix support for 8 char userids
+* zigickot       - Bug fix with replace on mixed pds (text and binary)
+                 - If mixed pds improve speed by eliminating individual copies
+* zigirepo       - Update pulldown menu for BRanch to BRANCH
+* zigistat       - Fix support for 8 char userids
+                 - Fix to not read ISPF stats if option U passed
+* zigiginf       - ISPF Panel update for ssh key filename
+* zigibra        - ISPF Panel update for new branch info
+* zigidfbr       - ISPF Panel update for new branch info
+* zigidfmt       - ISPF Panel update for new branch info
+* zigimer        - ISPF Panel update for new branch info
+* zigiskey       - ISPF Panel added for key size
+* ---            - All ISPF popup panels to add row at the top to
+                   allow room for panel headers
+* ---            - Additional panels as needed
+* zigihabt       - ISPF Panel About added latest release info
+
+Notes: ssh keys generated with type of ed25519 prior to the installation
+       of the zopen openssh are untagged and will fail after the zopen
+       openssh is installed - the solution is to recreate the keys.
+       IF the zopen ssh-keygen is not installed then only RSA ssh keys
+       are supported.
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                                Version 3.23
+                                Oct 04, 2024
+
+                         New Features and Functions
+                         --------------------------
+
+Key changes:     - undo now reverses ISPF statistic updates
+                 - 8 character TSO userid supported (thx Ray Mullins)
+                 - correct command reporting truncation
+                 - greatly improved diff command processing
+                   - using the diff command on the repository panel
+                 - new diff branch to compare active to other branch
+
+* zigi           - Fix typo for un-modifying
+                 - Enable undo for OMVS files
+                 - Fix missing zigissh ispf profile variable
+                 - Add diff to compare another branch for
+                   both full branch and member
+                 - On member undo also undo ISPF stats
+                 - Add info on diff branch command
+                 - Make Diff 1/2/3 displays consistent
+                 - Pass env. stem to zigigini
+* zigidfbr       - New panel for diff branch
+* zigidiff       - Update for zigi diff command options
+* zigigini       - Update to use the env values from zigi
+* zigih2l0       - Update for zigi diff command options
+* zigih2l1       - New panel for zigi diff branch
+* zigih201       - add DB option to diff branch on member
+* zigih340       - add DB option to diff branch on member
+* zigirlst       - add DB option to diff branch on member
+* zigirrep       - add DB option to diff branch on member
+* zigifdbk       - change zigi.rocks to github.com/zigi/zigi
+* zigihrln       - change zigi.rocks to github.com/zigi/zigi
+* zigihau        - various small text corrections
+* zigivmac       - edit macro - add preserver on to keep blanks
+* zg             - support 8 character TSO userids (thx to Ray Mullins)
+* zginstal       - support 8 character TSO userids (thx to Ray Mullins)
+* zigistat       - support 8 character TSO userids (thx to Ray Mullins)
+* githelp        - Improved to actually work better and add tbsort
+                 - Add git help -a for more options
+
+Note: Behavior change for the ISPF statistic files in .zigi directory
+      which are do not have a git add done automatically. Use ADDAll or
+      Add on Commit.
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                                Version 3.22
+                                Aug 12, 2024
+
+                         New Features and Functions
+                         --------------------------
+
+* zigi           - Ignore binary merge conflicts as they are automatic
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                                Version 3.21
+                               July 20, 2024
+
+                         New Features and Functions
+                         --------------------------
+
+* githelp        - Correction to work with z/OS Open Tools Git
+* zigickot       - Enhance if Co:Z then copy all members in one call
+* zigistat       - Fix so the ISPF stat format matches the Co:Z format
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                                Version 3.20
+                                May 14, 2024
+
+                         New Features and Functions
+                         --------------------------
+
+* zigi           - Change all iconv use to /bin/iconv
+                 - correct check for binary element in .gitattributes
+                 - remove zos-working-tree-encoding=BINARY as not needed
+                   in generated/update to .gitattributes
+                 - check for .ssh permissions and prompt to change if
+                   write enabled for group or universal
+* zigicnvt       - Change all iconv use to /bin/iconv
+                 - remove zos-working-tree-encoding=BINARY as not needed
+                   in generated/update to .gitattributes
+* zigigit        - Update panel for the z/OS Open Tools (zopen) config
+* zigistat       - Add in secnds on the zigi stats if not using Co:Z
+* zigickot       - Change to one do one sed per stats file to clean up
+                 - correct check for binary element in .gitattributes
+* zg             - correct check for binary element in .gitattributes
+* zginstal       - correct check for binary element in .gitattributes
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                                Version 3.19
+                            November 05, 2023
+
+                         New Features and Functions
+                         --------------------------
+
+* zigi           - Honor F3 on the ZIGISET (Config) panel
+                 - Honor users umask
+                 - update get_binfiles to ignore . #
+                 - Update .gitattribute update routine
+                   when adding binary elements
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                                Version 3.18
+                              August 13, 2023
+
+                         New Features and Functions
+                         --------------------------
+
+* zigi           - Support REGEN on the SSH key panel to regenerate
+                   the SSH key-pair while saving the old key-pair files.
+                 - New GITEnv command on the ZIGIPRIM panel to review
+                   and/or update the git environment file.
+                 - Remove -m for git log as not needed with 2.26.x and
+                   prevents diff for 2.4x.x
+                 - add ICONV_EBCDIC_ZOS_UNIX=1 to the default environment to
+                   support the z/OS Open Tools man-db port which includes
+                   an updated ICONV
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+* zigi           - When the repository SET Rename is used update the
+                   .gitattributes and .zigi/dsn with the renames.
+                 - Ignore invalid records in the ISPF stats file when
+                   updating using the LMMSTATS after a pull/merge.
+                   * Caused by a corrupt stats file from not fixing
+                     merge conflicts on the stat file
+* zigickot       - Add allocation unit of TRACK for PDS allocations
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                                Version 3.17
+                              February 27, 2023
+
+                         New Features and Functions
+                         --------------------------
+* New startup parm of /ENV to reset the Git Environemnt variable
+* when setting up .gitconfig use main as the defaultBranch
+* update remote detection due to change in git 2.39
+* various panels updated to include the active git version
+* panel zigiset cleanup for member generation value
+* new command for local and current repository of GITINFO to display
+  information on the version of ZIGI, Git, and other information
+* update zigiprim command pulldown menu to add SET
+* update zigioprm to add SET
+* update zigispls (Splash Screen) to remove bypass prompt (moved to SET)
+* moved SAMPXIT0 and STARTZIG to the Samples PDS
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+* zigi           - Correction for sub-directories
+                 - Correct invalid untrack pds member status
+                 - Correct file extract file encoding
+                 - Use the default ISPF Edit panel when viewing history
+                 - Correct but in viewing grep results
+                 - Change splash screen bypass setting to the SET dialog
+* zigivmac       - Change to improve hilite usage
+* ziginstall.rex - Update with current zigistat routine
+                 - Add zgpop4 ispf panel (inline)
+* ziginstal      - Update with current zigistat routine
+                 - Add zgpop4 ispf panel (inline)
+* zigickot       - Update to correct bug in the usssafe routine by using
+                   the version of the routine from zigi exec
+                 - Correct detection when .gitattributes are /* to
+                   copy all members at once instead of one at a time
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                                Version 3.16
+                              January 15, 2023
+
+                         New Features and Functions
+                         --------------------------
+
+* Update History Show and Recover to use git show instead of
+  stash/checkout/cp/stash
+* Update History with option Z to compare the historical version to
+  the current version using ISPF Edit
+* Support / in a branch name
+* Allow deletes of a Remote branch after the Local branch has been deleted
+* Allow / as alias of O on panels display popup prompt
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+* zigi          - fixed history issue with month of December (was DEV)
+                - fix ZIGIOREP panel so it works on popup
+                - display more msgs after merge if issues
+                - fixed merge to use origin/branch
+                - check for 'ahead' status for status message
+                - correct nesting after merge
+                - add fetch --all for merge diff
+                - force chtag after ispf stat updates with co:z getpds
+                - support AA for AddAll and AD for AddDSN
+* zigickot      - Update to remove merge conflicts in ISPF stat files
+                  thanks to spiridopoulos pan
+* zigistat      - delete the temp dataset used by AMBLIST
+* zigiorep      - updated panel to add fetch (missing for no good reason)
+* multiple      - fixup the lrecl used for viewing bpxwunix output
+* zigidelc      - update panel to prevent z/OS dataset delete if ReadOnly
+                  already had code but someone skipped it somehow
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                                Version 3.15
+                            September 11, 2022
+
+                         New Features and Functions
+                         --------------------------
+
+* Display the Pull report to allow user to see detailed pull info
+* zgbatch moved to new zigi.samples pds
+* On repository create translate blanks in the repository name to
+  underscores, allowing only 1 contiguous blank.
+* New Config option to enable prompting when exiting a repository.
+* Update Co:Z Toolkit url to https://coztoolkit.com
+* Update the repository SET options to configure the Default Add All
+  option, and when changed to remember it in the ISPF Profile.
+* New line selection of BL to invoke git blame on element
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+* zginstal      - remove duplicate procedures (found by rexx compiler)
+* zginstall.rex - remove duplicate procedures (found by rexx compiler)
+* zigi          - if status display requested don't if space clean
+                - add -S D (disp=shr) to putpds command
+                - fix tag/encoding for README.md
+                - allow F3 during Connect processing
+                - use ISPF LMMREN to rename a PDS member instead of
+                  the TSO RENAME command
+* zigickot      - add -S D (disp=shr) to putpds command
+* zg            - correct invalid iterate to a return
+* zigiemmd      - fix if dataset empty
+* fixed mixed tag error in multiple elements
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                               Version 3.14
+                               May 13, 2022
+
+                         New Features and Functions
+                         --------------------------
+
+* Improved messages if dataset or PDS member removed.
+* Added tutorial panels to the ZG command and add support
+  for the Co:Z utilities for ISPF stats
+* ZG updated to correctly tag and support binary elements
+  and to honor the default repository default userid
+* Add to Setting for all repos a show git status when repo is opened
+* Add visual indicator to ZIGIPRIM and ZIGIREPO if the Dovetail
+  Co:Z utilities are in use.
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+* Change to putpds to add disp=shr (-S D)
+  - zigi and zigickot
+* fixed mixed tag error in multiple elements
+* ZIGIREPO panel change for adddsn pulldown menu
+* usssafe routine updated in zigi and zigistat
+* usssafe usage improved
+* Correct error using grep on OMVS files
+* Correct history date/time sort
+* Correctly copy binary DSORG=PS RECFM=U files (not executable)
+* Improve detection for Co:Z utilities
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                               Version 3.13
+                              April 6, 2022
+
+                         New Features and Functions
+                         --------------------------
+
+*  The Commit panel now prompts for a Git ADD before the Commit.
+*  When a Repository is opened and checked for changes, any PDS members
+   without ISPF statistics will have them created.
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+*  Correct ISPF Stats on Edit
+*  Correct undo if member is #...
+*  Correct debugfil name
+*  Correct if no Dovetail
+*  Correct dsnvalid test for blank
+*  Correct Dataset add stats if no Dovetail
+*  Fix ZIGISTAT not found when creating a new repo
+*  Single member add to staging area now works again
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                               Version 3.12
+                             January 21, 2022
+
+                         New Features and Functions
+                         --------------------------
+
+Now REQUIRES a GIT version 2.26 or newer.
+More exploitation of Dovetail's getpds/putpds.
+Correctly tag z/OS datasets and members as they are copied to OMVS
+  Based upon the default codepage as found in the .gitattributes file
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+Correct situation where the ignore qualifiers is set to 0 so the full
+  dataset name is used for the OMVS and Git repositories.
+Correctly tag all dataset/members copied using CP or GETPDS to OMVS
+Changed ADDDSN abbreviation to ADDD and an alias of ADS
+Changed ADDALL abbreviation to ADD
+Some more work to correctly detect when z/OS PDS members have changed
+Update ZIGISTAT to handle load library statistics better (using AMBLIST)
+Update ZIGISTAT to correctly tag the statistics files
+Correct bug when attempting to add a PDS that is empty.
+Correct bug where a popup panel input data field is treated as an ISPF
+  command field.
+Correct a View where the LRECL > 255 and the Edit macro tries to turn
+  off Edit hiliting.
+Change the History extract to use Stash, if there are changes, along
+  with the previous checkout to eliminate issues if the archive is not
+  clean.
+Check the repository status on a Stash request and inform the user if
+  the repository is clean and Stash is not useful.
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                               Version 3.11
+                               July 5, 2021
+
+                         New Features and Functions
+                         --------------------------
+
+More exploitation of Dovetail's getpds/putpds.
+  - During checkout processing
+  - For ISPFSTATS
+
+Added MarkDown cheatsheet in ISPF edit on .md files (zigiemmd macro)
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+Fix issues with binary characters messing up in git 2.26
+Muplitple fixes on ' usssafe'  conversion of ($,# chars in uss-files)
+Removal of 32k member limit
+Env variables updated when .profile missing in action
+Uppercase 'files' with extensions now handled properly
+_BPX_SHAREAS now set to required
+Default prefix for zOS datasets is now <USERID>
+Various fixes related to 'exotic' codepages :)
+
+-----------------------------------------------------------------------------
+
+                             ZIGI Release Notes
+                               Version 3.10
+                              March 21, 2021
+
+                         New Features and Functions
+                         --------------------------
+
+Dual path cp use from and to a PDS to use the DoveTail getpds and putpds
+commands if available, otherwise continue to use cp. The speed improvement
+is an improvement of minutes to seconds.
+
+   To use the Dovetail enhancements (highly recommended) point your
+   browser to https://coztoolkit.com and download the Co:Z Co-Processing
+   Toolkit.  Along with the getpds and putpds, that will greatly enhance
+   ZIGI, you will also have Co:Z SFTP, Co:Z Launcher, Co:Z Dataset Pipes
+   and Co:Z Batch.
+
+   The use of the Co:Z Toolkit is subject to Dovetail's Community
+   License https://coztoolkit.com/docs/cozinstall/licenses.html
+
+   When installing refer to:
+   https://coztoolkit.com/docs/cozinstall/install.html#inst_coz And note
+   that the UID=0 (superuser) or other special permissions are not
+   required for use with ZIGI. Also, you do not need to address other
+   requirements or customizations such as z/OS OpenSSH.
+
+New User exit driver created (zigiexit) as a generalized exit facility.
+Initial Exit 0 has been defined to provide a path to DoveTails getpds/putpds
+if it isn't found in the default path using zigixit0 (provided as sampxit0).
+
+New CONNECT command to add an existing ZIGI formatted Git repository to
+the ZIGI ISPF table of repositories.
+
+Expand the ZIGI repository delete dialog to allow retaining the Git files
+and directories.
+
+New PDS member selection commands
+ - AF to git add with -f (force) to be used to add a PDS member that was
+   previously git ignored
+ - I to git ignore a PDS member and a new member status of Ý  ¨ Git Ignore
+ - Make the Grep panel a popup with a tutorial panel behind it
+
+Add Read Only flag to the ZIGIINFO display panel.
+
+Improved usssafe routine that is faster with less overhead.
+
+Add git log to ZGBATCH reporting.
+
+ZGBATCH now supports a COMMIT DD to provide the commit prose for the
+batch process. The DD may be a DD * or a DD referencing a sequential
+dataset or PDS member.
+
+Update ZGINSTALL to use Dovetails PUTPDS if it is in the path.
+
+For testing purposes added a check for a NOCOZ DD to bypass the Dovetail
+utilities and use native cp.
+
+Only work with z/OS datasets that are in the .zigi/dsn file. All other
+OMVS files will still be processed by Git but will not be copied to/from
+z/OS.
+
+Change git-encoding default value for new repositories, in preparation
+for Rocket Git 2.26.x, which ignores git-encoding attribute and encodes
+the content from the specified encoding to UTF-8.
+
+Use LF instead or CRLF as newline character, to be consistent with UNIX.
+
+New DIFF command for the local repository to display the differences for
+either the unstaged or staged changes.
+
+Change the ADDALL processing to a 'git add .' instead of adding only
+individual files.
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+1. Remove check of remote after commit as unnecessary.
+2. Clean up the history table. Key on commit and remove %b (body)
+3. In the table state test which checks the level of the repo table,
+   if there are no rows then just return to avoid meaningless messages.
+4. Fixed RM of a PDS bug, needed to add -r (recurse) for some edge cases
+5. Fix STOP as a valid command on the delete confirmation panel if
+   members of a PDS are deleted outside ZIGI but not removed from the
+   OMVS file system.
+6. Correct detection of untracked members
+7. On a branch change correct handling of added/deleted elements
+8. Correct test for existing datasets in zginstall.rex
+9. Update bugs in ZIGICNVT (CONVREPO command). It is still not prefect but
+   it is better. Now creates a .gitattributes if one does not exist and
+   supports files with $ in the name.
+10. Fixed incorrect tagging for untagged files with updates from Filipe Meireles
+11. Use -T for default cp copies to address issue with x'00' (perhaps other)
+    characters in a text member (thx to Filipe)
+12. Correct bug when using member file extensions with the AB (add binary)
+    member selection option.
+13. Correct bug not detecting changed sequential z/OS datasets
+14. Correct 3 issues within 3.10 found by Filipe:
+    - update save_dsninfo routine to ignore all dsn's with members
+    - correctly handle extensions in git_add_member routine
+    - Improve check for git clean (FM)
+15. Return ISPF message if history not found for the selected element at
+    the requested commit level
+16. Correct bug in History Recovery of PDS member
+17. Correct bug in History Recovery of PS dataset
+18. Correct stats handling and thus change detection for recfm=u (lmods)
+19. Correct but 391 - doing a commit of .gitattributes when adding a
+    dataset
+20. Correct repository delete processing that missed some z/OS datasets
+21. Prevent RECFM=V datasets from being added to a repository in Binary
+    as the OMVS cp command does not support them.
+22. Add Copy popup message to improve awareness when copying PS datasets
+23. Fix broken debug initialization
+24. Correct panel display if missing PDS member but entry in OMVS filesystem
+    and correct rm's
+25. Clean up tables after CHECK processing.
+26. Fix scroll max error in ZIGIEDIT panel when viewing data
+27. Fix use of Dovetail on Pull for selected members in ZIGICKOT
+28. Correction for tbsort on the repo table if sort variable corrupt
+29. Correct return processing from subdirectories
+
+=============================================================================
+                             ZIGI Release Notes
+                               Version 3.02
+                             September 6, 2020
+
+                         New Features and Functions
+                         --------------------------
+
+Support a Read Only Repository. These must be Created and Cloning is not
+recommended. Only operations that copy from z/OS to OMVS are supported with
+no updates to the z/OS datasets allowed from within ZIGI. Thus Branch,
+Replace, Merge, Stash, Flow, Edit, History Recover, Rename, and Remove are
+prevented.
+
+Anytime a z/OS dataset will be replaced there will be prompt to inform the
+user of this and allow the user to (a) change the HLQ, (b) the # of
+qualifiers to ignore, or both before proceeding. Or to cancel the operation.
+This is to prevent the replacement of any dataset without overt permission.
+This will only occur during a Clone or Replace operation.
+
+Update the Delete/Remove Repository from ZIGI more user friendly and thus
+easier to use and understand.
+
+Support multiple prefixes (HLQs) on the dataset add panel.
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+1. On the Add Dataset Panel do NOT allow the ignore qualifiers to be
+   changed from 0.
+2. After Stash Pop leave the Stash List display.
+3. On a Clone of a non-ZIGI repository do not create .gitattributes or
+   .zigi/dsn
+4. Allow changing Prefix (HLQ) in AddDSN table if ignore is 0
+5. If ignore is 0 correctly detect added datasets
+6. Remove calls to call work_with_repo_file and call update_repo_metadata
+   after updating a PDS member within ZIGI as not needed and speeds things
+   up a tad.
+
+=============================================================================
+
+                             ZIGI Release Notes
+                               Version 3.01
+
+                         New Features and Functions
+                         --------------------------
+
+Add _EDC_ZERO_RECLEN=Y to the OMVS environment variables to address
+datasets/members with variable length records (RECFM=VB) with blank
+records.  This will preserve those records.
+
+Allow a qualifier ignore value of zero to allow datasets from different
+HLQ's to be in the same repository. Not a great idea but doable. The full
+dataset name (e.g. SYS1.PARMLIB) will now be stored in the repository.
+When doing this care is required to prevent updating the z/OS dataset from
+the OMVS filesystem. When cloning such a repository an HLQ would still be
+required (thus SYS1.PARMLIB would clone into hlq.SYS1.PARMLIB).
+
+                          Bug Fixes and Other Updates:
+                          ----------------------------
+
+1. Remove duplicate code for repository delete that resulting in an
+   an incorrect message that the OMVS files had not been deleted when
+   they had.
+2. Issue 378 - add call to pfshow routine to turn off and then turn back
+   on the display of PFKeys around all pop-ups. Was missing from some.
+3. When changing branches, or pulling an update, if a OMVS file was
+   removed then the z/OS dataset that maps to it is not removed. If the
+   z/OS dataset was a PDS then the members were deleted. The member
+   deletes will no longer happen.
+4. Updated the add dataset popup panel to add a command entry field. This
+   allows a file extension (which was the 1st entry field) to have values
+   that may map to a ISPF command table entry.
+5. After a Merge the current repository display needed to be updated to
+   reflect added/removed datasets/files.
+6. Generalize binary file detection in case someone modifies .gitattributes
+   manually and doesn't follow the ZIGI convention.
+
+=============================================================================
+
+                             ZIGI Release Notes
+                               Version 3.00
+                              July 26, 2020
+
+                         New Features and Functions
+
+When performing a branch change to an existing branch, instead of
+completely replacing all the z/OS datasets, only replace (or delete) the
+changed elements.
+
+Update the zginstall.rex with to check if any z/OS datasets will be replaced
+during the install and provide an option to retry with a different HLQ.
+
+Added Dataset Allocation (ENQ) checking prior to performing a copy from the
+OMVS Git repository to a z/OS dataset with an option to Retry or Abort. This
+is to prevent a catastrophic failure with the OMVS cp (copy) command if the
+target z/OS dataset is allocated.
+
+Add Feedback command and action bar (under Help) to display a popup
+with a link to a feedback website.
+
+Add a Find option to the History table display to make it easier to
+find the commit of interest.
+
+Allow MV as an alias of RN (rename).
+
+When performing a merge, instead of completely replacing all the z/OS
+datasets, only replace (or delete) the changed elements.
+
+When removing a repository from ZIGI added an option to keep the Git files
+if the OMVS files are not deleted.
+
+Improve cursor positioning on the Commit Panel for a more intelligent and
+logical placement.
+
+In many situation where PDS members are copied, from PDS to OMVS or OMVS
+to PDS, the copy operation will now copy all members in one cp command.
+This means the progress popup with member name will not be available in
+this situation. In some cases where only a few of the PDS members are
+being copied then the member progress popup will remain.
+
+Enhance the element copy progress popup on a change detection to include
+the type of copy (text, binary, lmod).
+
+New ZGBATCH to provide the ability to run ZIGI in batch to add and
+commit/push updates (changes and new) elements. Must be run using a
+SYSEXEC/SYSPROC that uses the ZIGI EXEC library. Sample JCL included in
+the comments of the EXEC.
+
+Add the git command as a message in the View of the GITCMD results.
+
+Add a new value for Repository Name that is different from the Git
+repository name. This will allow the cloning of the same Git repository
+multiple times under different names - providing the PREFIX and OMVS
+directories are different.
+
+Improve checking on Repository Create, Clone, or Extract on the use of
+the provided HLQ's and OMVS directories.
+
+Add GITCMD to the Current Repository options popup menu.
+
+Replaced ROLLBACK dialog with EXTRACT dialog. This is the same as ROLLBACK
+with the addition of an eXtract option to create a set of z/OS datasets
+and OMVS files for the selected (one or more) commits. These are not Git
+managed and are intended to be used to create a delta package (aka PTF)
+with the changed elements only. The Extract and the TAGList Extract use
+the same ZIGIEXTR routine, one uses the Commit hash and the other uses
+the tag.
+
+New installer - a generic ZIGI installer. It is being used for ZIGI and
+there is an option to prime an existing ZIGI managed repository with it.
+The new installer, zginstall.rex, is in the root of the repositories OMVS
+directory. It copies the OMVS files that map to z/OS datasets into new
+z/OS datasets. Then it generates a z/OS REXX Exec, hlq.ZGSTAT.EXEC, which
+will apply the ISPF statistics to each z/OS Partitioned dataset member.
+
+Update to the Current Repository SET dialog with an option to add
+zginstall.rex, and a zginstall.readme, to the current repository.
+
+On the primary repository table display enhance the FIND to report
+when a Repeat Find wraps the table. Also for Find/RFind in the
+repoistory dataset display.
+
+Added a prompt to confirm/prevent deletions when checking for updates.
+Currently when a PDS member is missing but the OMVS version of it still
+exists, the PDS member is just deleted. This occurs during a Pull,
+Merge, or just entering the repository when all datasets are checked for
+updates. An option is provided to Browse/Edit the OMVS file along with
+an option to recover the member from the OMVS file.
+
+             -----------------------------------------------
+
+Bug Fixes and Other Updates:
+
+ 1. Expand URL field for longer URLs (Clone and Remote) and make
+    the field a scrollable field in other panels
+ 2. Expand title field for version (2.x to 2.xx)
+ 3. Correct row selection warning after a branch (residual variable)
+ 4. RM of untracked corrected
+ 5. Add error message if Browse (B) fails
+ 6. Improved file status checking for Partitioned Data Sets
+ 7. Correct bug in ZIGICKOT on cd if file name had $
+ 8. Correct binary file detection in ZIGI (remove usssafe)
+ 9. Correct ADDDSN PDS member copy counter x of y (x was off)
+10. Correct binary detection if a file extension in use
+11. Correct bug in binary test routine - added procedure expose binfiles.
+12. For many of the exec's add to bpxwunix the environment stem so that
+    SHAREAS=YES is honored to speed things up (no spawning)
+13. Correct TagList Extract issues
+    - TBDispl Failure after extract (added control display save/restore)
+    - Correct support for multiple extract tag selection
+14. Bypass Edit/View hilite if lrecl > 255
+15. Several coding bugs found with REXX compiler :(
+16. Correct member list sort to support members created/updated in 19xx
+17. Set the default permissions to 755 in the MKDIR popup
+18. Fix invalid selection in PDS member list after some commands
+19. Fix setting the default userid on commit
+20. Use the Default (commit) userid when opening a repo if a PDS member
+    does not have any ISPF statistics instead of using the users userid
+21. During repository check for updates, if a PDS member is missing the it
+    is deleted from OMVS and Git. Swapped the deletes so git rm is before
+    omvs rm.
+22. In the Network display the _ was being colored and shouldn't have been
+    if it is part of the prose and not the network diagram - fixed
+23. Ignore LMOD aliases as the cp command will handle those.
+24. Converted many bpxwunix calls to call docmd for consistency.
+25. In ZIGIDSNA correct cursor positioning if no prefix ignore.
+26. Improve target directory check for cloning and creation.
+27. Correct bug when pulling where member deletes are included.
+28. Improve process when F3 (cancel) on Rollback prompt popup
+29. Correct default userid reset if member has file extension
+30. Correct member status after a rename
+31. Resolve issue with ZG command failure on TBOpen (removed NoWrite)
+32. Change Clone and Create to test for home/.git instead of home/.zigi
+    for a non-git directory.
+33. Change the DSCB reference file directory from home/.zigi to
+    home/.zigirefd
+34. Make sure ZIGI checks for updates on entry
+35. Correct dataset check on branch delta to bypass z/OS copy of OMVS files
+36. If removing a Repository from ZIGI but retaining OMVS do not remove the
+    .git or .gitattributes files
+37. Speed up the History process of finding applicable commits for an
+    element significantly and replace author with subject in the display
+38. After Merge Conflicts resolved support selective z/OS replace instead
+    of full replace
+39. Correct STASH processing
+
+=============================================================================
+
+                             ZIGI Release Notes
+                                Version 2.9
+                               May 19, 2020
+
+                         New Features and Functions
+
+Add progress information on startup (checkout) and dataset add.
+
+Bug Fixes and Other Updates:
+
+ 1. Enable GITHELP to be open in multiple screens or stacked
+ 2. Fix merge resolution ISPF stats update error
+ 3. Fix failure after selecting multiple files/datasets in the Current
+    Repository display
+
+=============================================================================
+
+                             ZIGI Release Notes
+                                Version 2.8
+                               May 16, 2020
+
+                         New Features and Functions
+                         --------------------------
+
+New support for z/OS load modules, and associated aliases, to be managed by
+ZIGI and Git. This is transparent to the user. If a PDS is RECFM=U then it
+is treated as a load library. Be aware that when copying a load module from
+USS to a z/OS load library that the binder is invoked which may change the
+blocking of the load module but will retain all entry points, aliases,
+attributes, etc.
+
+   * ------------------------------------------------------------------ *
+   | NOTE: If your z/OS is not on z/OS 2.4 and you wish to utilize the  |
+   |       ability to have ZIGI and Git manage load modules then        |
+   |       install UJ01358 for z/OS 2.2 and UJ01356 for z/OS 2.3.       |
+   * ------------------------------------------------------------------ *
+
+New ZG command that is used outside of ZIGI to add/commit/push a updated PDS
+member from either the ISPF command line or from an enhanced member list.
+NOTE: The ZG exec is self-contained with inline ISPF panels. It must be
+installed in a library in the SYSEXEC or SYSPROC default allocation for use.
+
+NOTE: For the 'Open ZIGI' command in the new ZG it's required you have
+      the ZIGI-startup exec present in your SYSEXEC or SYSPROC library.
+
+The Local Repository table is updated to easily identify the column(s)
+that are sorted. The sorted column(s) will be white and non-sorted in
+turquoise.
+
+Colorize the Git Log Graph (Network command).
+
+Validate during Clone processing to prevent HTTP/HTTPS usage since ZIGI
+only supports SSH.
+
+New Import command on the Commit panel to import commit text from a dataset.
+
+Update SNAPSHOT and TagList Extract to bypass copy of OMVS directories/files
+if path is null.
+
+When removing (RM) a z/OS dataset or OMVS file provide the option to just
+remove it from git and not delete the dataset or file. If a z/OS dataset
+then provide an option to not delete the dataset or file but to remove it
+from git management. The options provided are Z delete z/OS dataset, O
+delete OMVS file, B to delete both, or N for No delete (only remove from
+Git). **NOTE** this does NOT apply to performing an RM on a PDS member due
+to the way PDS members are managed - performing an RM *will* delete the PDS
+member and the OMVS copy of the member.
+
+Bug Fixes and Other Updates:
+
+  1. Check z/OS dataset exists before attempting to copy to OMVS
+  2. Better parsing of remote repo URL in clone and adding remote panel.
+  3. Correct multiple row delete on row selection D in commit panel.
+  4. Correct Locate in PDS member list.
+  5. Update majority of tutorial panels for grammer/spelling/format.
+  6. Validate the OMVS directory for TagList Extract.
+  7. Correct the sortdate field - was not being consistently set the same
+  8. Correct bug with taglist create to prevent recursion into the repo
+     processing routine
+  9. Fix duplicate dataset add by commenting the prior dataset in .zigi/dsn
+ 10. Update test for commit insert command (I###)
+ 11. On repository delete remove the last reference date file
+ 12. Fix check for last reference date is the repository is not in the users
+     home directory
+ 13. PDS members starting with # break cp going to z/OS
+ 14. Add a progress indicator to the OMVS->z/OS Copy (ZIGICKOT)
+
+=============================================================================
+
+                             ZIGI Release Notes
+                                Version 2.7
+                              March 29, 2020
+
+                         New Features and Functions
+                         --------------------------
+
+Support file extensions for PDS members when copied to OMVS. The extension
+is defined when the PDS is added to ZIGI for management and only one extension
+is allowed per PDS, and it may NOT be changed. The extension is then removed
+when the file is copied to the PDS.
+
+Redo the Current Repository Action Bar Menu. Split out General and Repository
+into General, Maintenance, and Repository.
+
+New Check command to be used by the user to check the state of the z/OS
+datasets on demand. The check will occur when the repository is opened and
+then only when the user requests. The state of the OMVS files will continue
+to be checked frequently as the user interacts wtih the repository.
+
+Reduce processing overhead by only checking z/OS datasets for changes if
+they have changed since the last date that ZIGI checked them. The test
+will be to check the dataset if the last reference date (from listdsi)
+is the same as the current day or if it is greater than the last
+reference date as saved by ZIGI in the users home directory under
+.zigi/filename where filename is the OMVS file copy of the z/OS dataset.
+
+Enable multiple row selection in many instances (not all).
+
+Improved detection of deleted, or renamed, PDS members during PULL
+processing.
+
+Improved detection of deleted, or renamed, PDS members at ZIGI repository
+startup.
+
+Bug Fixes and Other Updates:
+
+  1. Check z/OS dataset exists before attempting to copy to OMVS
+  2. Table panel updates to use zgsr instead of zscr for scrolling field
+  3. Small cosmetic updates to some panels
+  4. Change ZIGICKOT
+       - check for .zigi/dsn before reading it - in case non-ZIGI repos
+       - if not there then set recfm/lrecl/blksize defaults
+       - continue to do selective dataset/member restores but do a full
+         ISPF stats reapply
+  5. Remove check for hyphen for 1st char of dsname
+  6. Remove tbquery that is not required
+  7. Remove version from default installation datasets
+
+
+=============================================================================
+                             ZIGI Release Notes
+                                Version 2.6
+                               March 9, 2020
+
+                         New Features and Functions
+                         --------------------------
+
+
+Add the Info command to the Current Repositories set of commands to display
+a summary about the repository.
+
+Add Change History as an option on the Help action bar to view the change
+history, which is a copy of the Release Notes dataset.
+
+On the Current Repository table allow multiple rows to be selected (S) for
+serial processing.
+
+On the TagList Extract save the tag information in an OMVS file for
+historical purposes.
+
+Improved progress status messages on dataset/file rename.
+
+Support the use of a hypen (-) in a z/OS dataset name.
+
+On the Current Repository SET command panel add the option to change the
+dataset prefix. The new prefix must have the same number of qualifiers and
+will result in all the z/OS datasets being renamed along with any OMVS files
+based on the prefix qualifier ignore value.
+
+=============================================================================
+                             ZIGI Release Notes
+                                Version 2.5
+                               March 5, 2020
+
+                         New Features and Functions
+                         --------------------------
+
+  /--------------------- From ZIGI 2.0 ------------------------\
+  | The former use of -M with CP to convert the @#$ special    |
+  | characters to/from z/OS for unix has been replaced by      |
+  | escaping those characters where required to preserve them. |
+  \------------------------------------------------------------/
+
+Implement new feature 'zigiflow' to help the user make controlled
+changes.  The ZIGI Flow feature will assist with making updates to
+repositories.  The general use case for using ZIGI flow is as follows:
+
+    - Step 1: Start a new ZIGI flow
+    - Step 2: Make all your changes, commit
+    - Step 3: Finish your ZIGI flow
+
+Implemented a basic conversion capability to convert a cloned non-ZIGI
+configured git repository into a ZIGI repository. For this to work the
+repository must have been cloned by ZIGI so that ZIGI 'knows' about it
+and the following requirements of the repository must be met:
+
+   - Each PDS is mapped to a subdirectory under the repository root
+   - Each PDS member is a file in the appropriate sub-directory
+       (e.g. main.asm in the asm directory)
+   - Binary files must end in .bin
+   - Only files, either sequential or PDS members, within the repository
+      must conform to z/OS dataset naming conventions or they are
+      treated as OMVS files.
+
+After creating a new local repository open the Add Dataset instead of
+requiring the user to do that (saves a step).
+
+Provide the option to specify the codeset for character encoding during
+Clone and Create repository processing. The default is IBM-1047 if not
+specified.
+
+Replace the intrusive menus on the table display panels with an Action
+Bar set of menus. Also added on those panels an F3 under the scroll
+amount to facilitate point-and-shoot. The O option is still available
+to bring up a context sensitive command options menu and the / row
+selection will bring up a context sensitive row selection options menu.
+
+Implement new commands STASH to Stash Push to save the current workspace
+and revert to the most recent Commit level.  And STASHL to list all
+saved Stashes with these options:
+
+    - Branch to create a new branch from a saved stash
+    - Remove to drop a saved stash
+    - Show to show the stash summary
+    - Diff to show the summary and diffs
+    - Pop to restore a saved stash
+
+Provided an option to enhance point-and-shoot in the ZIGI Config panel.
+Option S will leave things as they are. Option P will enable
+point-and-shoot so that a double click outside the table will bring up
+the Options command selection popup, and a double click inside the table
+will bring up the row selection popup.
+
+Change REFRESH command to REPLACE and add FETCH command for Current
+Repository. Only Fetch when a repository is selected or on demand.
+
+For Removes (deletes) add option to turn off prompting.
+
+New ZIGI Cheat Sheet (pdf) and ZIGI User's Guide (pdf, azw3, mobi, epub)
+have been created and are new with v2.5 which can be found at the ZIGI
+wiki:
+
+   https://github.com/wizardofzos/zigi/wiki/6.-Documentation
+
+Update to the Current Repository commands menu to add ADDALL. This
+command will do a git add for all Untracked or Modified datasets or
+files.
+
+Update to the PDS Member commands menu to add ADDALL. This command will
+do a git add for all Untracked or Modified members.
+
+Add a check to all ISPF panels asking for a userid to verify if the user
+enters an 8 character userid that the system supports the 8 character
+userid.
+
+On the PDS Member table a new line option of AB to add the member in
+binary format.
+
+On the ADDDSN table an option for a PDS of AB to add the dataset as a
+binary dataset. If a partitioned dataset will contain both text and
+binary members then add the dataset as text (option S or A) and the from
+the Current Repository menu select the dataset and then use the AB (add
+binary) row selection for the binary members.
+
+Fix for Bitbucket users where the clone clipboard copy contains 'git
+clone' before the SSH info. The 'git clone' will now be automatically
+removed to allow the Bitbucket user to just copy from Bitbucket and
+paste into ZIGI for clone or remote add.
+
+Add new TAG command on the Current Repository menu to add a git tag to
+the current repository. Both the lightweight tags, without comments, and
+annotated tags, with a short comment.
+
+Add new TAGLIST command on the Current Repository menu to display a list
+of all tags with an option to show the full tag details, or to create a
+new branch from the tag level.
+
+Add SORT option for the Local Repository display to sort the repository
+list by Repository name, Prefix, or the Last used Date. One or two
+columns may be sorted and the sort order is remembered when ZIGI ends
+and is used at the next ZIGI start. The sort popup panel now supports
+both the primary and secondary sort columns.
+
+Added an optional tag field to the commit panel. Now a tag can be added
+along with the commit.
+
+Added a new Category field to the repository summary that is displayed
+on the Local Repository table display. It is a sort column like the
+other columns on the display.
+
+New option to hide the splash screen if desired, and to restore it.
+
+Additional validation on the Clone and Create panels to validate the
+OMVS directory that is specified actually exists.
+
+=============================================================================
+
+                             ZIGI Release Notes
+                                Version 2.0
+                             February 2, 2020
+
+                         New Features and Functions
+                         --------------------------
+
+  /------------------------------------------------------------\
+  | The former use of -M with CP to convert the @#$ special    |
+  | characters to/from z/OS for unix has been replaced by      |
+  | escaping those characters where required to preserve them. |
+  \------------------------------------------------------------/
+
+Update to the GITLOG prompt to include, or exclude, diff's in the
+report.
+
+A new GITCMD dialog that enables the execution of any valid Git command
+within the active Git repository. A command history is maintained so
+that commands may be reused. The command results are then browsed or
+viewed.  If the command table grows beyond the point the user is
+comfortable with it then a CLEAR command is available to start over.
+
+Grep processing has been enhanced with an option to view the results in
+a report mode using the raw grep results or in a Dataset/File view where
+the results are presented summarized by dataset or file. The display
+allows selecting the individual dataset, or file, for Edit, Browse, or
+View.
+
+History is a dataset, PDS member, or file selection option that will
+display a list of all commits for that element. From the table display
+the user can select using C to view the commit entry, including the
+diffs.  Selecting using S will view the historical version of the
+element. While in ISPF View the user has access to all ISPF Edit
+commands, including  Compare, Copy, and Create.
+
+Merge supports merging another local branch into the current branch.
+Merge conflicts can be resolved using ISPF Edit Compare or using a
+customized Edit display that highlights the merge conflicts using the
+Git provided conflict markers. At this time a merge performs a full
+refresh of ALL datasets (this is planned to become a selective refresh
+in a future release).
+
+OMVS subdirectories with files are now supported. These directories and
+files must be added outside of ZIGI at this time and when ZIGI starts it
+will recognize those as untracked. The untracked directories, and/or
+files, must then be added to the Git staging index for management by
+Git.
+
+Rename an element will rename the z/OS dataset, z/OS PDS member, OMVS
+file, and any ISPF statistics file. It will also perform a git mv
+(rename) so all Git information about the original will be retained with
+the new name.
+
+Remove an element will delete the z/OS dataset, z/OS PDS member, OMVS
+file, and any ISPF statistics file. It will also perform a git rm
+(remove) so all git information about the element will be deleted.
+
+Added new row selection option of / to tables where it made sense. The /
+will bring up a popup menu for the available section options. These
+popups include an entry field and point-and-shoot capabilities.
+
+Added new menu toggle to Basic and Pro that will remove ALL menus.
+
+A new command option on those panels is O which will display a popup
+command selection panel that support both an entry field and
+point-and-shoot.
+
+When the git log is viewed the git diff's will not be colorized with
+blue for inserts and red for deletions. This only works when viewing and
+not with browsing.
+
+Update Pull processing to only refresh the z/OS datasets that are
+updated during the pull process, and only the PDS members that were
+updated. If more than 25% of the PDS members are updated then the full
+PDS is refreshed.  Before ALL z/OS datasets were refreshed.
+
+On the Local Repository panel the option to use 'S repo' to select a
+repository from the command line. The 'repo' is case sensitive. This
+allows for faster access to a repository.
+
+Changed the debug logging when the ZIGIDEBG DD is present to log to a
+file in the users home directory named zigidebug.d(julian
+date).t(hhmmss). On exit from ZIGI a USS directory list (3.17) will be
+presented to the user with just these files from which the user can
+browse/edit/delete.
+
+Update the Config panel to prompt the user for the default number of
+generations to use when allocating every Partitioned Dataset during
+Clone, Pull, or Refresh processing.
+
+Update the Repository Delete dialog to enable the deletions of the
+repositories z/OS datasets and add an additional entry field to confirm
+the repository delete is really wanted.
+
+Change the Current Repository ADD command to ADDDSN since that is what
+it does to differentiate it from the Add selection option which performs
+a git add.
+
+Implement a new SNAPSHOT option for the Current Repository that creates
+an Escrow version of the repository - the z/OS datasets and the OMVS
+files. This is outside of ZIGI and git. It also generates a tag at the
+time of the snapshot to enable easy access to the git repository for
+reviewing information.
+
+Implemented binary support. On the 'Add Dataset' panel ZIGI now supports
+the 'AB' command. This will do the same as the trusted 'A' command (add
+a dataset) to ZIGI, however this file will be treated as binary. This
+allows you to have ZIGI manage your XMIT files, or OBJECT files. Load
+modules obviously not supported. Take note, for a PDS this means ALL the
+members in the PDS will be treated as binary. (this also updates and
+commits the
+.gitattributes file)
+
+In the element History view a new option to Recover the historical
+source is now available. It only works for z/OS datasets. Both PDS
+members and PS datasets may be recovered. OMVS historical recovery is
+not supported at this time. A PDS member must be recovered to a PDS
+member, even if the recovery dataset is being allocated new.
+
+Update Rollback with two new commands. ONLY (O) will limit the display
+of commits to those with the provided string in the title (e.g. O roll)
+in a case insensitive compare. REFRESH (R) will refresh the table back
+to all entries.
+
+New Undo (U) selection for datasets, OMVS files, and PDS members. This
+will undo any changes made prior to a commit. After a commit the
+Rollback option or the History Recover option will be required.
+
+Speeded up the ADDDSN dialog initialization by replacing the use of
+LISTC with IBM's sample IGGCSIRX code that was modified to return only
+the dataset names.
+
+Added to the ADDDSN dialog a Find/RFind capability to easily find the
+dataset names to be added. Find works with a string that is searched
+anywhere in the dataset name (e.g. F PDS will find the 1st occurrence of
+a dataset with PDS in the name and repeat find (F5) find the next).
+
+=============================================================================
+
+                             ZIGI Release Notes
+                                Version 1.3
+                              December 5, 2019
+
+                             ZIGI Release Notes
+                                Version 1.1
+                             November 22, 2019
+
+                             ZIGI Release Notes
+                                Version 1.0
+                             November 1, 2019

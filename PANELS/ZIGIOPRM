@@ -1,0 +1,68 @@
+)Attr Default(%+_)
+  _ type( input) intens(low ) caps(on ) just(left ) hilite(uscore)
+  } type( input) intens(low ) caps(off) just(left ) hilite(uscore)
+  @ type(output) intens(high) caps(off) just(left )
+  $ type(output) intens(low ) caps(off) just(left )
+  + type(text) intens(low) skip(on)
+  % type(text) intens(high) skip(on)
+  # type(output) hilite(reverse) color(turq) caps(off)
+  ¨ type(output) caps(off) pas(on) intens(high) color(white) hilite(uscore)
+)Body Window(47,17) cmd()
++
++Enter Selection:_z        +
++
+ ¨Clone+   Remote repository
+ ¨Config+  View Git configuration
+ ¨Connect+ Connect to Existing Local Repository
+ ¨Create+  Local repo from scratch
+ ¨Find+    String in table fields:_findstr +
+ ¨GitEnv+  Review/Update Git Environment File
+ ¨Githelp+ Display menu of Git Help pages
+ ¨Gitinfo+ Display ZIGI/Git Information
+ ¨SET+     Set Git Defaults
+ ¨SElect+  Select a Repository:}selfind +
+ ¨SOrt+    Sort the table
+ ¨SSH+     View your SSH public key
+             +Or%F3+to cancel.
++
+)Init
+ &zwinttl = 'ZIGI Local Repository Commands'
+ .zvars = '(zcmd)'
+ .cursor = zcmd
+ &zcmd  = &z
+ &clone   = 'CLone'
+ &create  = 'CReate'
+ &connect = 'COnnect'
+ &ssh     = 'SSH'
+ &find    = 'FIND'
+ &set     = 'SET'
+ &select  = 'Select'
+ &sort    = 'Sort'
+ &config  = 'COnfig'
+ &gitenv  = 'GITEnv'
+ &githelp = 'GITHelp'
+ &gitinfo = 'GITInfo'
+ .help = zigih100
+)Proc
+*REXX(*)
+ if abbrev('FIND',zcmd,1) = 1 then zcmd = 'FIND'
+*ENDREXX
+ if (&zcmd EQ 'FIND')
+    ver (&findstr,nb)
+)PNTS
+ FIELD(CLONE   ) VAR(ZCMD) VAL('CLONE')
+ FIELD(CREATE  ) VAR(ZCMD) VAL('CREATE')
+ FIELD(CONNECT ) VAR(ZCMD) VAL('CONNECT')
+ FIELD(SELECT  ) VAR(ZCMD) VAL('SELECT')
+ FIELD(SORT    ) VAR(ZCMD) VAL('SORT')
+ FIELD(SET     ) VAR(ZCMD) VAL('SET')
+ FIELD(SSH     ) VAR(ZCMD) VAL('SSH')
+ FIELD(CONFIG  ) VAR(ZCMD) VAL('CONFIG')
+ FIELD(GITENV  ) VAR(ZCMD) VAL('GITENV')
+ FIELD(GITHELP ) VAR(ZCMD) VAL('GITHELP')
+ FIELD(GITINFO ) VAR(ZCMD) VAL('GITINFO')
+)End
+/* -------------------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                                         */
+/* Copyright (C) 2020-2024 GPL V3 - Henri Kuiper, Lionel Dyck, Ray Mullins    */
+/* -------------------------------------------------------------------------- */
