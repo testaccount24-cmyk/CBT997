@@ -1,0 +1,61 @@
+)Attr
+ @ type(input ) caps(off) hilite(uscore) intens(low)
+ Ý type(input ) caps(on ) hilite(uscore) intens(low)
+ _ type( input) intens(low ) just(left ) hilite(uscore)
+ # type(output) hilite(reverse) color(turq) caps(off)
+ ! type(output) color(red) caps(off)
+)Body Expand(\\)
++-\-\#zigtitle    +\-\
+%Command ===>_zcmd
++
+% Specify+the Location of an Environment File that points to Git. This is
++ used when you wish to use a Git that isn't defined in your%/etc/profile+or
++ your%home/.profile+, or it can be the zopen tools%../etc/zopen-config+file.
++
++ Location of env-file: @gitenv                                             +
++
++
++ Your Git installation should have an env-file located somewhere on your
++ system. This file contains things like:
++
++ export PATH=/zdo/rocket/bin:$PATH
++ export MANPATH=$MANPATH:/zdo/rocket/man
++ export PERL5LIB=/zdo/rocket/lib/perl5:$PERL5LIB
++ export LIBPATH=/zdo/rocket/lib/perl5/5.24.0/os390/CORE:$LIBPATH
++
++ Use start option%/ENV+to be prompted to change, or use%/ENVR+to nullify
++ or use the%GITEnv+command on the primary menu to access.
++
+              +Press%Enter+to update and continue, or%F3+to cancel
+)Init
+ .help = zigihint
+)Proc
+*REXX(* zerrsm zerrlm)
+  parse value '' with zerrsm zerrlm
+  if gitenv = '' then return
+  x = syscalls('ON')   /* setup syscall environment */
+  if left(gitenv,1) = '~' /* test for ~ - home alias */
+  then do
+    address syscall ,    /* get the home directory in case */
+      'getpwnam' sysvar('sysuid') 'pw.'
+    home = pw.pw_dir     /* save it in home variable */
+    gitenv = home''substr(gitenv,2) /* replace with home */
+  end
+  else gitenv = gitenv              /* or not            */
+  address syscall ,
+    'stat (gitenv) st.'    /* test if file exists */
+  x = syscalls('OFF')         /* Turn off syscalls environment */
+  if st.0 = 0 then do
+     zerrsm = 'Error.'
+     zerrlm = gitenv 'does not exist - try again.'
+     end
+*EndREXX
+  if (&zerrsm NE &Z)
+     .msg = isrz002
+     .cursor = gitenv
+     ver (&gitenv,nb)
+)end
+/* ------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                            */
+/* Copyright (C) 2020-2023 GPL V3 - Henri Kuiper and Lionel Dyck */
+/* ------------------------------------------------------------- */

@@ -1,0 +1,62 @@
+)Attr
+ @ type(input ) hilite(uscore) caps(off) intens(low)
+ _ type(input ) hilite(uscore) caps(on) intens(low )
+ $ type(output) hilite(uscore) caps(off)
+ { type(output) intens(low)
+ } type(input ) hilite(uscore) caps(on) intens(low ) just(left)
+ # type(output) hilite(reverse) color(turq) caps(off)
+)Body Expand(\\)
++Set Defaults+\-\#zigtitle    +\-\-----------
+%Command ===>_zcmd                                                             +
++
+%Git Defaults (used at Commit time):
++  user.name  :@zigiuid                                                        +
++  user.email :@zigimail                                                       +
++
+%PDSE Member Generations :}z   +Range 0 to{sl
+  +Note: Specify%0+unless using a tool that supports generations.
++
+%Display Options Popup or Select on Point-and-Shoot:_z+(P or S)
+%Display git status when repository is opened:      _z+(Y or N)
+%Prompt before Exiting ZIGI:                        _z+(Y or N)
+%Bypass File Extension Prompt:                      _z+(Y or N)
+  +Set to%Y+if you do not plan to use file extension for PDS members to bypass
+  +being asked when adding partitioned datasets.
+%Bypass ZIGI Splash Screen at startup:              _z+(Y or N)
++
++
+%See:+https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
++
+                     +Press%Enter+to save, or%F3+to cancel.
+)Init
+ if (&mgen = &Z)
+     &mgen = 0
+ vget (bypass)
+ .zvars = '(mgen pnsdef showst exitp extfile bypass)'
+ &setcont = 'Y'
+ if (&pnsdef EQ &Z)
+     &pnsdef = 'S'
+ if (&showst EQ &Z)
+     &showst = 'Y'
+ if (&exitp EQ &Z)
+     &exitp = 'N'
+ if (&extfile EQ &Z)
+     &extfile = 'Y'
+ if (&bypass EQ &Z)
+     &bypass = 'N'
+ .help = zigih140
+)Proc
+  ver (&zigiuid,nb)
+  ver (&zigimail,nb)
+  ver (&mgen,nb,range,0,&sl)
+  &setcont = &Z
+  ver (&pnsdef,nb,list,P,S)
+  ver (&showst,nb,list,Y,N)
+  ver (&exitp,list,nb,Y,N)
+  ver (&extfile,list,nb,Y,N)
+  ver (&bypass,list,nb,Y,N)
+)end
+/* --------------------- Copyright (C) ------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                            */
+/* Copyright (C) 2020-2023 GPL V3 - Henri Kuiper and Lionel Dyck */
+/* ------------------------------------------------------------- */

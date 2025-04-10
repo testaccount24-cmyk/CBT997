@@ -1,0 +1,37 @@
+)attr default(%+_)
+  _ type( input) intens(low ) just(left ) hilite(uscore)
+  ~ type(text) intens(high) caps(off) just(asis ) hilite(reverse) color(turq)
+  Ý type(output) intens(high) caps(off) just(left) pas(on)
+)Body Expand(\\)
+%Tutorial -\-\~The z ISPF Git Interface (zigi)%\-\- Tutorial
+%Selection ===>_ZCMD                                                          +
++
+                               %Row Selections+
++
++The following row selection options are available:
++
+  %A+ Add the member to the%Git index+so that it can be Committed
+  %AB+Add the member in binary to the%Git index+so that it can be Committed
+  %AF+For Add to override a previous Git Ignore
+  %B+ Browse - Browse the member
+  %BL+Blame - Show revision/author/date-time of all changes
+  %D+ Compares the uncommited version to the current version using git diff
+  %DB+Compares the selected member to another Branch
+  %H+ History - view previous version of the PDS member
+  %I+ Git Ignore the member
+  %RM+Remove the member from the PDS and the repository
+  %RN+reName the member
+  %S+ Select the member and Edit it
+  %U+ Undo a non-Committed change
++
++
+           +Press the%Enter+key to begin your ZIGI tutorial journey.
+)Init
+ .cursor = &zcmd
+)PROC
+ &zcont = zigihs00
+)END
+/* ------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                            */
+/* Copyright (C) 2020-2022 GPL V3 - Henri Kuiper and Lionel Dyck */
+/* ------------------------------------------------------------- */

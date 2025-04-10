@@ -1,0 +1,35 @@
+)attr default(%+_)
+  _ type( input) intens(low ) just(left ) hilite(uscore)
+  ~ type(text) intens(high) caps(off) just(asis ) hilite(reverse) color(turq)
+  Ý type(output) intens(high) caps(off) just(left) pas(on) skip(on)
+)Body Expand(\\)
+%Tutorial -\-\~The z ISPF Git Interface (zigi)%\-\- Tutorial
+%Selection ===>_ZCMD                                                          +
++
+                                 %Diff+
++
+%Diff+branch will use a%git diff+on the current branch to the selected
++branch.
++
++The differences will then be displayed in an ISPF table with a row
++for each element. Select that element to view the differences.
++
++
++
++
++
++  I am always doing what I can't do yet in order to learn how to do it.
++  --- Vincent Van Gogh (letter to Anthon van Rappard in 1885)
++
++
++
+         +Press the%Enter+key to continue your ZIGI tutorial journey.
+)Init
+ .cursor  = &zcmd
+)PROC
+     &zcont = zigih2d0
+)END
+/* ------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                            */
+/* Copyright (C) 2020-2024 GPL V3 - Henri Kuiper and Lionel Dyck */
+/* ------------------------------------------------------------- */

@@ -1,0 +1,107 @@
+/* --------------------  rexx procedure  -------------------- *
+ | Name:      zigivmac                                        |
+ |                                                            |
+ | Function:  ISPF Edit Macro to insert messages at the top   |
+ |            of the viewed data.                             |
+ |                                                            |
+ | Author:    Lionel B. Dyck                                  |
+ |                                                            |
+ | History:  (most recent on top)                             |
+ |            09/26/24 LBD - Fix for git diff 1 and 2         |
+ |            09/24/24 LBD - preserve blanks                  |
+ |            09/17/24 LBD - get git diff info                |
+ |            02/06/23 LBD - Set hilite off for diff displays |
+ |            02/03/23 LBD - remove hilite off if lrecl > 255 |
+ |            02/01/23 LBD - Improve hilte if lrecl < 256     |
+ |            12/06/21 LBD - Check LRECL < 256 before turning |
+ |                           hilite off                       |
+ |            07/17/20 LBD - Turn off Hilite                  |
+ |            06/22/20 LBD - Add Git Command msg if present   |
+ |            06/11/20 LBD - If lrecl > 255 no hilite         |
+ |            03/07/20 LBD - Check for > 1 records for hilite |
+ |            12/16/19 LBD - creation                         |
+ |                                                            |
+ | ---------------------------------------------------------- |
+ |    ZIGI - the z/OS ISPF Git Interface                      |
+ |    Copyright (C) 2020-2024 - Henri Kuiper and Lionel Dyck  |
+ |                                                            |
+ |    This program is free software: you can redistribute it  |
+ |    and/or modify it under the terms of the GNU General     |
+ |    Public License as published by the Free Software        |
+ |    Foundation, either version 3 of the License, or (at     |
+ |    your option) any later version.                         |
+ |                                                            |
+ |    This program is distributed in the hope that it will be |
+ |    useful, but WITHOUT ANY WARRANTY; without even the      |
+ |    implied warranty of MERCHANTABILITY or FITNESS FOR A    |
+ |    PARTICULAR PURPOSE.  See the GNU General Public License |
+ |    for more details.                                       |
+ |                                                            |
+ |    You should have received a copy of the GNU General      |
+ |    Public License along with this program.  If not, see    |
+ |    <https://www.gnu.org/licenses/>.                        |
+ * ---------------------------------------------------------- */
+  parse value '' with null
+  Address ISREdit
+  'Macro (options)'
+  'Reset ALL'
+  'Preserve On'
+  '(last) = linenum .zlast'
+  if last = 0 then do
+     'end'
+     exit
+     end
+  '(lrecl) = lrecl'
+  '(data) = line 1'
+  if lrecl < 256
+      then 'hilite on'
+  Address ISPExec 'vget (vtitle gitcmde localrep zigirep gitdiff)'
+  if gitdiff /= null then do
+     gitcmde = null
+     parse value gitdiff with branch bname gfile
+     if gfile = '+' then gfile = null
+     if pos('--',gfile) > 0 then do
+        parse value gfile with . '--' gfile
+        gfile = strip(gfile)
+        end
+    data = 'Git Diff:'
+    'line_before 1 = msgline (data)'
+    data = 'Current Branch:' branch
+    'line_before 1 = msgline (data)'
+    data = 'Compare Branch:' bname
+    'line_before 1 = msgline (data)'
+    if word(gfile,1) = 'Changes' then gfile = null
+    if strip(gfile) /= null then do
+       data = 'Compare File:  ' gfile
+       'line_before 1 = msgline (data)'
+       end
+    end
+  if gitcmde /= '' then do
+    data = 'Current Directory:' localrep'/'zigirep
+    'line_before 1 = msgline (data)'
+    data = 'Git Command: git' gitcmde
+    'line_before 1 = msgline (data)'
+    data = left('-',length(data),'-')
+    'line_before 1 = msgline (data)'
+  end
+  if vtitle = '' then do
+     if lrecl < 256 then
+        'hilite off'
+     exit
+     end
+  parse value vtitle with element'\'hdate'\'hauthor'\'fulldsn .
+  if left(fulldsn,1) = "'" then do
+    parse value element with x'/'mem .
+    fulldsn = strip(fulldsn,'B',"'")
+    fulldsn = fulldsn'('mem')'
+  end
+  else fulldsn = element
+  data = 'Historical view of element:' fulldsn
+  'line_before 1 = msgline (data)'
+  data = 'From:' strip(hauthor) 'on' strip(hdate)
+  'line_before 1 = msgline (data)'
+  data = 'All ISPF View commands are available, including Compare, Create' ,
+    'and Copy.'
+  'line_before 1 = msgline (data)'
+  data = left('-',72,'-')
+  'line_before 1 = msgline (data)'

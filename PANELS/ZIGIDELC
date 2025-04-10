@@ -1,0 +1,61 @@
+)Attr
+ $ type(output) caps(off)
+ @ type(input ) hilite(uscore) intens(low)
+ + type(text) skip(on) intens(low)
+)Body Window(53,10)
++
++Repository:$zigirep
++
++Keep the Git files     @z+%Y+to keep, or%N+to delete
++Keep the OMVS files    @z+%Y+to keep, or%N+to delete
++Keep the z/OS Datasets @z+%Y+to keep, or%N+to delete
++
++Confirm Removal from ZIGI@z+%Y+or%N+
++
+      +Press%Enter+to continue or%F3+to cancel.
+)Init
+  vget (readonly)
+ .zvars = '(delgit delco delzd delcf)'
+ &zwinttl = 'ZIGI Delete Confirmation'
+ .help = zigihdel
+)Proc
+*REXX(* readonly zerrsm zerrlm zerrhm zerralrm zerrtp)
+  parse value '' with zerrsm zerrlm
+  if delcf = 'N' then do
+    delco = 'N'
+    delzd = 'N'
+  end
+  if delgit = 'Y' & delco = 'N' then do
+    zerrlm = 'Deleting the OMVS files without deleting the git' ,
+      'files makes no sense. Correct to proceed.'
+    zerrhm   = 'zigih00'
+    zerralrm = 'NO'
+    zerrtp   = 'NOTIFY'
+  end
+  if delzd = 'N' then
+    if readonly = 1 then do
+    zerrlm = 'Repository is Read Only thus the z/OS' ,
+      'datasets may NOT be deleted. Change to Y to proceed.'
+    zerrhm   = 'zigih00'
+    zerralrm = 'NO'
+    zerrtp   = 'NOTIFY'
+    delzd = 'Y'
+    delgit = 'N'
+  end
+*ENDREXX
+ if (&readonly EQ 1)
+     &delzd = Y
+ if (&zerrlm NE &Z)
+     &delzd = Y
+    .msg = isrz003
+    .cursor = delzd
+ if (&zerrlm EQ &Z)
+   ver (&delgit,nb,list,Y,N)
+   ver (&delco,nb,list,Y,N)
+   ver (&delzd,nb,list,Y,N)
+   ver (&delcf,nb,list,Y,N)
+)end
+/* -------------------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                                         */
+/* Copyright (C) 2020-2024 GPL V3 - Henri Kuiper, Lionel Dyck, Ray Mullins    */
+/* -------------------------------------------------------------------------- */

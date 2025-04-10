@@ -1,0 +1,93 @@
+)attr default(%+_)
+  _ type( input) intens(low ) just(left ) hilite(uscore) caps(on)
+  ~ type(text) intens(high) caps(off) just(asis ) hilite(reverse) color(turq)
+  Ý type(output) intens(high) caps(off) just(left) pas(on) skip(on) color(white)
+    hilite(uscore)
+)Body Expand(\\)
+%Tutorial -\-\~The z ISPF Git Interface (zigi)%\-\- Tutorial
+%Selection ===>_ZCMD                                                          +
++
+                              %Local Repositories+
++
+%Commands available+(select one for more information or press%Enter+to see all)
++
+  ÝClone+  Make a local copy of a remote repository
+  ÝConfig+ Review/Update your name and e-mail for%Git+
+  ÝConnect+Connect to an existing ZIGI format %Git+repository
+  ÝCreate+ Create a new local repository
+  ÝFind+   Find/RFind a string in either the repository name or the prefix
+  ÝGitenv+ Review/Update the Git environment file (optional)
+  ÝGithelp+Navigate the Git help output via ISPF panels
+  ÝGitinfo+ZIGI/Git Information
+  ÝSelect+ Select a repository by name
+  ÝSOrt+   Sort the table
+  ÝSSH+    Review your SSH public key
++
++Use%O+to display a command popup selection menu if the menu has been hidden.
++
+         +Press the%Enter+key to continue your ZIGI tutorial journey.
+)Init
+ .cursor  = &zcmd
+ &clone   = 'Clone'
+ &connect = 'Connect'
+ &create  = 'Create'
+ &ssh     = 'SSH'
+ &config  = 'Config'
+ &gitenv  = 'Gitenv'
+ &githelp = 'GitHelp'
+ &gitinfo = 'GITInfo'
+ &find    = 'Find'
+ &sort    = 'Sort'
+ &select  = 'Select'
+ &ztut = '100'
+ vput (ztut)
+)PROC
+ &zup = zigihint
+*REXX(* zcmd zsel)
+  Select
+    When abbrev('CLONE',zcmd,2) = 1 then zcmd = 1
+    When abbrev('CREATE',zcmd,2) = 1 then zcmd = 2
+    When abbrev('SSH',zcmd,2) = 1 then zcmd = 3
+    When abbrev('CONFIG',zcmd,2) = 1 then zcmd = 4
+    When abbrev('GITENV',zcmd,4) = 1 then zcmd = 5
+    When abbrev('GITHELP',zcmd,4) = 1 then zcmd = 6
+    When abbrev('GITINFO',zcmd,4) = 1 then zcmd = 7
+    When abbrev('FIND',zcmd,2) = 1 then zcmd = 8
+    When abbrev('SELECT',zcmd,2) = 1 then zcmd = 9
+    When abbrev('SORT',zcmd,2) = 1 then zcmd = 10
+    When abbrev('CONNECT',zcmd,3) = 1 then zcmd = 11
+    Otherwise nop
+  end
+*Endrexx
+ &ZSEL = TRANS( &ZCMD
+           0,zigih101    /*  Row Selections      */
+           1,zigih110    /*  CLONE               */
+           2,zigih120    /*  CREATE              */
+           3,zigih130    /*  SSH                 */
+           4,zigih140    /*  CONFIG              */
+           5,zigih150    /*  GITENV              */
+           6,zigih160    /*  GITHELP             */
+           7,zigih161    /*  GITINFO             */
+           8,zigih170    /*  Find                */
+           9,zigih180    /*  Select              */
+          10,zigih190    /*  Sort                */
+          11,zigih125    /*  Connect             */
+           *,'?'
+           )
+)PNTS
+ Field(clone)   var(zcmd) val('1')
+ Field(create)  var(zcmd) val('2')
+ Field(ssh   )  var(zcmd) val('3')
+ Field(config)  var(zcmd) val('4')
+ Field(gitenv ) var(zcmd) val('5')
+ Field(githelp) var(zcmd) val('6')
+ Field(gitinfo) var(zcmd) val('7')
+ Field(find   ) var(zcmd) val('8')
+ Field(select ) var(zcmd) val('9')
+ Field(sort   ) var(zcmd) val('10')
+ Field(connect) var(zcmd) val('11')
+)END
+/* ------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                            */
+/* Copyright (C) 2020-2023 GPL V3 - Henri Kuiper and Lionel Dyck */
+/* ------------------------------------------------------------- */

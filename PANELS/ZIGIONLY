@@ -1,0 +1,18 @@
+)Attr
+ $ type(output) caps(off)
+ @ type(input ) hilite(uscore) intens(low)
+ + type(text) skip(on) intens(low)
+)Body Window(41,5) cmd()
++
++Enter the Only Filter:@filter       +
++
++Press%Enter+to continue or%F3+to cancel.
++
+)Init
+ &zwinttl = 'ZIGI Only Prompt'
+)Proc
+)end
+/* -------------------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                                         */
+/* Copyright (C) 2020-2024 GPL V3 - Henri Kuiper, Lionel Dyck, Ray Mullins    */
+/* -------------------------------------------------------------------------- */

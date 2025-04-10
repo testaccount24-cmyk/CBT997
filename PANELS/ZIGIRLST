@@ -1,0 +1,88 @@
+)Attr Default(%+_)
+  _ type( input) intens(low ) caps(on ) just(left ) hilite(uscore)
+  @ type(output) intens(high) caps(off) just(left )
+  $ type(output) intens(low ) caps(off) just(left )
+  + type(text) intens(low) skip(on)
+  % type(text) intens(high) skip(on)
+  # type(output) hilite(reverse) color(turq) caps(off)
+  ¨ type(output) caps(off) pas(on) intens(high) color(white) hilite(uscore)
+)Body Window(68,22)
++
++Member:@mem             $exth      @extf
++
++Enter Selection:_z +
++
++¨Add+     (A)+ Add the member as Text to the Git Index
++¨AddBin+  (AB)+Add the member as Binary to the Git Index
++¨AddForce+(AF)+Add an ignored member to the Git Index
++¨Browse+  (B)+ Browse the dataset/file
++¨BLame+   (BL)+Show revision/author/date-time of all changes
++¨Edit+    (E)+ Edit the dataset/file
++¨Diff+    (D)+ Show the Diff's
++¨DiffBr+  (DB)+ Show the Diff's for this member with another branch
++¨History+ (H)+ Display Commit History
++¨Ignore+  (I)+ Git Ignore the Member
++¨Remove+  (RM)+Remove the element
++¨Rename+  (RN)+Rename the element
++¨Select+  (S)+ Edit the dataset/file
++¨Undo+    (U)+ Undo an UnCommitted Change
++¨View+    (V)+ View the dataset/file
+                   +Or%F3+to cancel.
++
+)Init
+*REXX(* exth extf extens)
+ parse value '' with exth extf null
+ if extens /= null then do
+    exth = 'OMVS File:'
+    extf = lower(mem)'.'extens
+    end
+if xx = 1 then do
+lower:
+ parse arg input
+ out = translate(input,"abcdefghijklmnopqrstuvwxyz",,
+                       "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+ return out
+ end
+*ENDREXX
+ &zwinttl = 'ZIGI PDS Member Selection Options'
+ .zvars = '(zsel)'
+ .cursor = zsel
+ &zsel  = &z
+ &edit    = 'Edit'
+ &view    = 'View'
+ &add     = 'Add'
+ &addbin  = 'AddBin'
+ &addforce = 'AddForce'
+ &browse  = 'Browse'
+ &blame   = 'BLame'
+ &diff    = 'Diff'
+ &diffbr  = 'DiffBr'
+ &history = 'History'
+ &ignore  = 'Ignore'
+ &remove  = 'Remove'
+ &rename  = 'Rename'
+ &select  = 'Select'
+ &undo    = 'Undo'
+)Proc
+ ver (&zsel,list,A,AB,AF,B,BL,E,D,DB,H,I,RM,RN,S,U,V)
+)PNTS
+  Field(add    )  var(zsel) val('A')
+  Field(addbin )  var(zsel) val('AB')
+  Field(addforce) var(zsel) val('AF')
+  Field(browse )  var(zsel) val('B')
+  Field(blame  )  var(zsel) val('BL')
+  Field(diff   )  var(zsel) val('D')
+  Field(diffbr )  var(zsel) val('DB')
+  Field(edit   )  var(zsel) val('S')
+  Field(select )  var(zsel) val('S')
+  Field(history)  var(zsel) val('H')
+  Field(ignore )  var(zsel) val('I')
+  Field(remove )  var(zsel) val('RM')
+  Field(rename )  var(zsel) val('RN')
+  Field(undo   )  var(zsel) val('U')
+  Field(view   )  var(zsel) val('V')
+)End
+/* -------------------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                                         */
+/* Copyright (C) 2020-2024 GPL V3 - Henri Kuiper, Lionel Dyck, Ray Mullins    */
+/* -------------------------------------------------------------------------- */

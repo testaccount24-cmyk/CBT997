@@ -1,0 +1,41 @@
+)attr default(%+_)
+  _ type( input) intens(low ) just(left ) hilite(uscore)
+  ~ type(text) intens(high) caps(off) just(asis ) hilite(reverse) color(turq)
+  Ý type(output) intens(high) caps(off) just(left) pas(on) skip(on)
+)Body Expand(\\)
+%Tutorial -\-\~The z ISPF Git Interface (zigi)%\-\- Tutorial
+%Selection ===>_ZCMD                                                          +
++
+                                %GITINFO+
++
+%GITINFO+displays all information about the current %ZIGI+and%Git+environment.
++
+%Syntax: GITInfo
+%
+%
+%
+%
++
++
++
++
+%
++
++
++
++
+         +Press the%Enter+key to continue your ZIGI tutorial journey.
+)Init
+ .cursor  = &zcmd
+ vget (ztut)
+)PROC
+ if (&ztut = 100)
+     &zup   = ZIGIH160
+     &zcont = ZIGIH170
+ if (&ztut = 200)
+     &zcont = ZIGIH250
+)END
+/* ------------------------------------------------------------- */
+/* ZIGI - the z/OS ISPF Git Interface                            */
+/* Copyright (C) 2020-2023 GPL V3 - Henri Kuiper and Lionel Dyck */
+/* ------------------------------------------------------------- */
